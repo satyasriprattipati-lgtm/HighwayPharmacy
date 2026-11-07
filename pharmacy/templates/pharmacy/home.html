@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head><title>Highway Medico</title>
+<style>body{font-family:Arial;margin:0;background:#f0f7f0}.emg{background:#d32f2f;color:white;text-align:center;padding:12px;font-weight:bold}.emg a{color:white}nav{background:#1a5e1a;padding:15px 40px;display:flex;justify-content:space-between}nav a{color:white;text-decoration:none;margin-left:15px}.hero{background:linear-gradient(135deg,#1a5e1a,#ff6f00);color:white;text-align:center;padding:50px 20px}.hero h1{font-size:42px}.search-box{background:white;max-width:700px;margin:20px auto;padding:20px;border-radius:15px;display:flex;gap:10px}.search-box input,.search-box select{flex:1;padding:12px;border:1px solid #ddd;border-radius:8px}.search-box button{background:#ff6f00;color:white;border:none;padding:12px 25px;border-radius:8px;cursor:pointer}.cards{display:flex;gap:20px;justify-content:center;padding:30px;flex-wrap:wrap}.card{background:white;padding:25px;border-radius:15px;width:250px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.1)}.card a{background:#1a5e1a;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;display:inline-block;margin-top:10px}</style>
+</head><body>
+<div class="emg">🚨 Emergency? <a href="tel:108">Call 108 - Ambulance</a></div>
+<nav><a href="/" style="font-weight:bold;font-size:20px;">🌿 Highway Medico</a><div><a href="/">Home</a><a href="/medicines/">Medicines</a><a href="/pharmacies/">Shops</a><a href="/login/">Login</a><a href="/register/">Register</a></div></nav>
+<div class="hero"><h1>Highway lo Medicine Shops - Location Tho</h1><p>Total Shops: {{ total_pharmacies }} | Medicines: {{ total_medicines }} | 24/7 Available</p>
+<form method="GET" action="/pharmacies/" class="search-box">
+<input type="text" name="q" placeholder="Medicine - Ex: Paracetamol, Dolo 650">
+<select name="highway"><option value="">All Highways</option><option value="NH-65">NH-65</option><option value="NH-16">NH-16</option><option value="NH-44">NH-44</option></select>
+<button>🔍 Search</button></form></div>
+<div class="cards">
+<div class="card"><h2>🛣️ NH-65</h2><p>Mogaltur - Narsapur Road</p><a href="/pharmacies/?highway=NH-65">View Shops</a></div>
+<div class="card"><h2>🛣️ NH-16</h2><p>Rajahmundry - Eluru Road</p><a href="/pharmacies/?highway=NH-16">View Shops</a></div>
+<div class="card"><h2>🛣️ NH-44</h2><p>Hyderabad - Bangalore Road</p><a href="/pharmacies/?highway=NH-44">View Shops</a></div>
+</div></body></html>

@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Highway Medicine Shops</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f7f0;
+            margin: 0;
+        }
+
+        .nav {
+            background: #1a5e1a;
+            padding: 18px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .con {
+            max-width: 950px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        h2 {
+            color: #1a5e1a;
+        }
+
+        .filter {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .filter input[type="text"],
+        .filter select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .filter button {
+            background: #1a5e1a;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .shop {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            margin-bottom: 22px;
+            border-left: 6px solid #ff6f00;
+            box-shadow: 0 3px 12px #ddd;
+        }
+
+        .shop h3 {
+            color: #1a5e1a;
+        }
+
+        .shop p {
+            line-height: 1.6;
+        }
+
+        .map-container {
+            margin-top: 20px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 280px;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .map {
+            background: #1976d2;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .call {
+            background: #2e7d32;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 12px;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            color: #d32f2f;
+        }
+
+        @media(max-width: 600px) {
+            .nav {
+                padding: 15px;
+            }
+
+            .filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter input,
+            .filter select,
+            .filter button {
+                width: 100%;
+            }
+
+            .shop {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="nav">
+    <a href="/">🌿 Highway Medico</a>
+    <a href="/medicines/">Medicines</a>
+    <a href="/pharmacies/">Shops</a>
+    <a href="/logout/">Logout</a>
+</div>
+
+<div class="con">
+
+    <h2>📍 Highway Medicine Shops - Location</h2>
+
+    {% if medicine %}
+        <p>
+            Medicine:
+            <b>{{ medicine.name }} - Rs.{{ medicine.price }}</b>
+        </p>
+    {% endif %}
+
+    {% if highway %}
+        <p>Highway: <b>{{ highway }}</b></p>
+    {% endif %}
+
+    <form method="GET" class="filter">
+
+        <input type="text"
+               name="q"
+               value="{{ query }}"
+               placeholder="Search medicine name">
+
+        <select name="highway">
+
+            <option value="">All Highways</option>
+
+            <option value="NH-65"
+                {% if highway == "NH-65" %}selected{% endif %}>
+                NH-65
+            </option>
+
+            <option value="NH-16"
+                {% if highway == "NH-16" %}selected{% endif %}>
+                NH-16
+            </option>
+
+            <option value="NH-44"
+                {% if highway == "NH-44" %}selected{% endif %}>
+                NH-44
+            </option>
+
+        </select>
+
+        {% if medicine %}
+            <input type="hidden"
+                   name="medicine"
+                   value="{{ medicine.id }}">
+        {% endif %}
+
+        <label>
+            <input type="checkbox"
+                   name="open24"
+                   value="1"
+                   {% if open24 == '1' %}checked{% endif %}>
+            24/7 Only
+        </label>
+
+        <button type="submit">Search</button>
+
+    </form>
+
+    {% for shop in shops %}
+
+        <div class="shop">
+
+            <h3>
+                {{ shop.name }} - ⭐ {{ shop.rating }}
+            </h3>
+
+            <p>
+                📍 <b>Location:</b>
+                {{ shop.location }}, {{ shop.highway }}
+            </p>
+
+            <p>
+                🏠 <b>Address:</b> {{ shop.address }}
+            </p>
+
+            <p>
+                📏 <b>Distance:</b> {{ shop.distance }}
+            </p>
+
+            <p>
+                👤 <b>Owner:</b> {{ shop.owner_name|default:"Not provided" }}
+            </p>
+
+            <p>
+                📞 {{ shop.phone }}
+                | 📧 {{ shop.email }}
+            </p>
+
+            <p>
+                {% if shop.is_open_24 %}
+                    🟢 <b>24/7 Open</b>
+                {% else %}
+                    🔴 Closed - {{ shop.opening_time }}
+                    to {{ shop.closing_time }}
+                {% endif %}
+            </p>
+
+            <div class="map-container">
+
+                <h4>📍 Pharmacy Location Map</h4>
+
+                {% if shop.latitude and shop.longitude %}
+
+                    <iframe
+                        loading="lazy"
+                        allowfullscreen
+                        src="https://maps.google.com/maps?q={{ shop.latitude }},{{ shop.longitude }}&output=embed">
+                    </iframe>
+
+                {% else %}
+
+                    <iframe
+                        loading="lazy"
+                        allowfullscreen
+                        src="https://maps.google.com/maps?q={{ shop.address|urlencode }}&output=embed">
+                    </iframe>
+
+                {% endif %}
+
+                <a class="map"
+                   target="_blank"
+                   href="https://www.google.com/maps/search/?api=1&query={{ shop.name|urlencode }}+{{ shop.address|urlencode }}">
+                    📍 View on Google Maps
+                </a>
+
+                <a class="call" href="tel:{{ shop.phone }}">
+                    📞 Call Shop
+                </a>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="empty">
+            <h3>Sorry! No Shops Found</h3>
+            <p>Try changing your medicine name or highway filter.</p>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

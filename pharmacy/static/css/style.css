@@ -1,0 +1,24 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Segoe UI, Arial; background:#f4f8ff; }
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:15px 40px; background:#0d47a1; color:white; }
+.logo { display:flex; align-items:center; gap:10px; font-weight:bold; font-size:20px; }
+.nav-logo { width:40px; height:40px; background:white; border-radius:50%; padding:3px; }
+.nav-links a { color:white; text-decoration:none; margin-left:15px; }
+.login-btn { background:white; color:#0d47a1 !important; padding:6px 14px; border-radius:20px; }
+.hero { display:flex; align-items:center; justify-content:space-between; padding:50px; background:white; margin:20px; border-radius:12px; }
+.hero-text { flex:1; }
+.hero-text h1 { font-size:36px; color:#0d47a1; margin-bottom:10px; }
+.hero-img img { width:300px; }
+.btn-primary { background:#1976d2; color:white; padding:10px 20px; border-radius:6px; text-decoration:none; display:inline-block; border:none; cursor:pointer; }
+.btn-secondary { background:#e3f2fd; color:#0d47a1; padding:10px 20px; border-radius:6px; text-decoration:none; margin-left:10px; }
+.features { display:flex; gap:20px; padding:20px; justify-content:center; }
+.card { background:white; padding:20px; border-radius:10px; width:250px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+.container { width:80%; margin:30px auto; background:white; padding:30px; border-radius:12px; }
+.login-body { display:flex; justify-content:center; align-items:center; height:100vh; }
+.login-container { display:flex; background:white; border-radius:15px; overflow:hidden; width:800px; box-shadow:0 10px 30px rgba(0,0,0,0.1); }
+.login-left { flex:1; background:#e3f2fd; display:flex; align-items:center; justify-content:center; padding:20px; }
+.login-left img { width:80%; }
+.login-right { flex:1; padding:40px; }
+.login-right input, .search-box { width:100%; padding:12px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px; }
+.full { width:100%; }
+.pharmacy-card { background:#f9f9f9; padding:15px; border-radius:8px; margin:10px 0; display:flex; gap:15px; align-items:center; }

@@ -1,0 +1,4 @@
+<!DOCTYPE html><html><body style="font-family:Arial;background:#f0f7f0;display:flex;justify-content:center;padding-top:80px;">
+<div style="background:white;padding:30px;border-radius:15px;width:350px;text-align:center;"><h2>🌿 Login</h2>
+{% if messages %}{% for msg in messages %}<p style="color:red;">{{ msg }}</p>{% endfor %}{% endif %}
+<form method="POST">{% csrf_token %}<input name="username" placeholder="Username - admin" style="width:90%;padding:12px;margin:8px;border-radius:8px;border:1px solid #ccc;"><br><input type="password" name="password" placeholder="Password - admin123" style="width:90%;padding:12px;margin:8px;border-radius:8px;border:1px solid #ccc;"><br><button style="width:95%;padding:12px;background:#1a5e1a;color:white;border:none;border-radius:8px;">Login</button></form><p>New? <a href="/register/">Register</a></p></div></body></html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html><html><head><title>Medicines</title>
+<style>body{font-family:Arial;background:#f0f7f0;margin:0}.nav{background:#1a5e1a;padding:15px 40px}.nav a{color:white;text-decoration:none;margin-right:15px}.con{max-width:800px;margin:20px auto}.card{background:white;padding:20px;border-radius:12px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}.btn{background:#ff6f00;color:white;padding:10px 18px;border-radius:8px;text-decoration:none}</style>
+</head><body>
+<div class="nav"><a href="/">🌿 Highway Medico</a><a href="/pharmacies/">Shops</a><a href="/logout/">Logout</a></div>
+<div class="con"><h2>💊 Medicines Search</h2>
+<form method="GET"><input type="text" name="q" value="{{ query }}" placeholder="Search Medicine" style="padding:12px;width:60%;border-radius:8px;border:1px solid #ccc;"><button style="padding:12px 20px;background:#1a5e1a;color:white;border:none;border-radius:8px;">Search</button></form><br>
+{% for m in results %}
+<div class="card"><div><h3>{{ m.name }} - {{ m.category }}</h3><p>Rs.{{ m.price }} | Stock: {{ m.stock }} | {{ m.generic_name }}</p><p>{{ m.description }}</p></div><a class="btn" href="/pharmacies/?medicine={{ m.id }}{% if highway %}&highway={{ highway }}{% endif %}">Find Shops →</a></div>
+{% empty %}<p>No medicines found</p>{% endfor %}
+</div></body></html>
